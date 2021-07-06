@@ -40,9 +40,9 @@ public class konfirmasi {
     }
 
 
-    public void get_konfirmasi(){
+    public void get_konfirmasi(String jenis){
         ApiRequest api = Retroserver_server_AUTH.getClient().create(ApiRequest.class);
-        Call<Response_konfirmasi> call = api.get_konfirmasi();
+        Call<Response_konfirmasi> call = api.get_konfirmasi(jenis);
         call.enqueue(new Callback<Response_konfirmasi>() {
             @Override
             public void onResponse(Call<Response_konfirmasi> call, Response<Response_konfirmasi> response) {
@@ -54,7 +54,7 @@ public class konfirmasi {
                         Log.i("isi_notif", "onResponse: "+data);
                         if (data != null && data.getIsi() != null) {
                             List<IsiItem_konfirmasi> result = data.getIsi();
-                           // badge.setNumber(jumlah_notif);
+                           // badge.setNumber(juaksimlah_notif);
                             countryView.konfirmasi(result);
                         }
 

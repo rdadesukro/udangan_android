@@ -4,12 +4,17 @@ package com.example.undangan;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,6 +25,7 @@ import com.example.undangan.model.konfrimasi.IsiItem_konfirmasi;
 import com.example.undangan.model.tamu.IsiItem_tamu;
 import com.example.undangan.presenter.konfirmasi;
 
+import com.example.undangan.presenter.login;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.security.ProviderInstaller;
@@ -32,14 +38,17 @@ import javax.net.ssl.SSLContext;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import okhttp3.CipherSuite;
 import okhttp3.ConnectionSpec;
 import okhttp3.TlsVersion;
 
+import static com.example.undangan.MainActivity.badge;
+
 /**
  * A simple {@link Fragment} subclass.
  */
-public class fragment_konfirmasi extends Fragment implements view_konfirmasi {
+public class fragment_konfirmasi extends Fragment implements view_konfirmasi,view_login {
 
     int conunter = 10;
 
@@ -47,13 +56,21 @@ public class fragment_konfirmasi extends Fragment implements view_konfirmasi {
     RecyclerView Recycler;
     int page_new;
     konfirmasi konfirmasi;
+    login login;
     private TextView txtTdkAda;
     private ImageView imgData2;
     private SwipeRefreshLayout swifeRefresh;
     private RecyclerView rvAku;
     private ProgressBar progressBar;
+    String jenis="1";
 
     private com.example.undangan.adapter.adapter_konfirmasi adapter_konfirmasi;
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        setHasOptionsMenu(true);
+
+    }
 
     public fragment_konfirmasi() {
         // Required empty public constructor
@@ -87,14 +104,16 @@ public class fragment_konfirmasi extends Fragment implements view_konfirmasi {
                 .allEnabledCipherSuites()
                 .build();
 
-
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setSubtitle("Hadir");
         konfirmasi = new konfirmasi(this, getActivity());
-        konfirmasi.get_konfirmasi();
+        login = new login(this, getActivity());
+        konfirmasi.get_konfirmasi(jenis);
+        login.total(jenis);
 
         swifeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                konfirmasi.get_konfirmasi();
+                konfirmasi.get_konfirmasi(jenis);
 
             }
         });
@@ -150,11 +169,62 @@ public class fragment_konfirmasi extends Fragment implements view_konfirmasi {
 
     }
 
+    @Override
+    public void total(String total) {
+        if (total== String.valueOf(0)){
+            badge.setVisible(false);
+
+        }else {
+            badge.setVisible(true);
+            badge.setNumber(Integer.parseInt(total));
+        }
+
+    }
+
     private void initView(View v) {
         txtTdkAda = v.findViewById(R.id.txt_tdk_ada);
         imgData2 =  v.findViewById(R.id.img_data2);
         swifeRefresh =  v.findViewById(R.id.swifeRefresh);
         rvAku =  v.findViewById(R.id.rv_aku);
         progressBar =  v.findViewById(R.id.progressBar);
+    }
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.konfirmasi, menu);
+        MenuItem hadir = menu.findItem(R.id.hadir);
+        MenuItem ragu = menu.findItem(R.id.ragu);
+        MenuItem tidak = menu.findItem(R.id.tidak);
+        hadir.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                ((AppCompatActivity)getActivity()).getSupportActionBar().setSubtitle("Hadir");
+                jenis="1";
+                login.total(jenis);
+                konfirmasi.get_konfirmasi(jenis);
+                return false;
+            }
+        });
+        ragu.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                ((AppCompatActivity)getActivity()).getSupportActionBar().setSubtitle("Ragu");
+                jenis="2";
+                login.total(jenis);
+                konfirmasi.get_konfirmasi(jenis);
+                return false;
+            }
+        });
+        tidak.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                ((AppCompatActivity)getActivity()).getSupportActionBar().setSubtitle("Tidak Hadir");
+                jenis="3";
+
+                login.total(jenis);
+                konfirmasi.get_konfirmasi(jenis);
+                return false;
+            }
+        });
+        super.onCreateOptionsMenu(menu, inflater);
     }
 }

@@ -7,6 +7,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -18,6 +21,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,6 +31,8 @@ import com.example.undangan.adapter.adapter_tamu;
 import com.example.undangan.model.konfrimasi.IsiItem_konfirmasi;
 import com.example.undangan.model.tamu.IsiItem_tamu;
 import com.example.undangan.presenter.konfirmasi;
+import com.example.undangan.presenter.login;
+import com.github.squti.guru.Guru;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.security.ProviderInstaller;
@@ -42,6 +48,7 @@ import javax.net.ssl.SSLContext;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import okhttp3.CipherSuite;
 import okhttp3.ConnectionSpec;
 import okhttp3.TlsVersion;
@@ -70,6 +77,12 @@ public class fragment_tamu extends Fragment implements view_konfirmasi, com.exam
     ProgressDialog progressDialog;
     AlertDialog.Builder acion;
     private FloatingActionButton btnShare;
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        setHasOptionsMenu(true);
+
+    }
 
     public fragment_tamu() {
         // Required empty public constructor
@@ -103,7 +116,7 @@ public class fragment_tamu extends Fragment implements view_konfirmasi, com.exam
                 .allEnabledCipherSuites()
                 .build();
 
-
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setSubtitle("");
         konfirmasi = new konfirmasi(this, getActivity());
         konfirmasi.get_tamu();
 
@@ -357,4 +370,42 @@ public class fragment_tamu extends Fragment implements view_konfirmasi, com.exam
 
         dialog.show();
     }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.aksi, menu);
+        MenuItem refres = menu.findItem(R.id.logout);
+        refres.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                SweetAlertDialog pDialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE);
+                pDialog.setTitleText("Apakah anda yakin ingin keluar ?");
+                pDialog.setCancelable(false);
+                pDialog.setConfirmText("Ya");
+                pDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        sweetAlertDialog.dismissWithAnimation();
+                        login countryPresenter = new login(null,getActivity());
+                        countryPresenter.logout(progressDialog);
+
+                    }
+                });
+                pDialog.setCancelButton("Tidak", new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sDialog) {
+                        sDialog.dismissWithAnimation();
+                    }
+                });
+                pDialog.setCanceledOnTouchOutside(false);
+                pDialog.show();
+
+
+
+                return false;
+            }
+        });
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
 }

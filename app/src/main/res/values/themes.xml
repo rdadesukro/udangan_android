@@ -13,4 +13,19 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.Bridge">
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryDark">@color/grey_300</item>
+        <item name="android:windowEnterAnimation">@anim/dialog_show</item>
+        <item name="android:windowExitAnimation">@anim/dialog_dismiss</item>
+        <item name="colorAccent">@color/biru</item>
+
+    </style>
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds" tools:targetApi="lollipop">true</item>
+        <item name="android:windowTranslucentStatus" tools:targetApi="kitkat">true</item>
+
+    </style>
 </resources>

@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.MenuItem;
 
 import com.example.undangan.adapter.ViewPagerAdapter;
+import com.github.squti.guru.Guru;
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -34,15 +35,15 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
 
         Log.i("status_loign", "onCreate: "+status_login);
-
+        status_login = Guru.getString("status_loign", "false");
         bottomNavigationView = (BottomNavigationView)findViewById(R.id.navigation);
         badge = bottomNavigationView.getOrCreateBadge(R.id.konfirmasi);
         badge.setVisible(true);
-//        if (status_login.equals("false")){
-//            badge.setVisible(false);
-//        }else {
-//            badge.setVisible(true);
-//        }
+        if (status_login.equals("false")){
+            badge.setVisible(false);
+        }else {
+            badge.setVisible(true);
+        }
 
         loadFragment(new fragment_tamu());
         getSupportActionBar().setTitle("Tamu");

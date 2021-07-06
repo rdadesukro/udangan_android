@@ -1,6 +1,8 @@
 package com.example.undangan.Server;
 
 
+import com.github.squti.guru.Guru;
+
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
@@ -27,7 +29,7 @@ public class Retroserver_server_AUTH {
                     @Override
                     public Response intercept(Chain chain) throws IOException {
                         Request newRequest  = chain.request().newBuilder()
-                                .addHeader("Authorization", "Bearer " + "")
+                                .addHeader("Authorization", "Bearer " + Guru.getString("auth", "false"))
                                 .build();
                         return chain.proceed(newRequest);
                     }

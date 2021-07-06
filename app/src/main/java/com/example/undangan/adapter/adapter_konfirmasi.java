@@ -68,16 +68,16 @@ public class adapter_konfirmasi extends RecyclerView.Adapter<adapter_konfirmasi.
             Log.i("status_baca", "onBindViewHolder: "+dm.getBaca()+" "+e);
         }
 
-//        if (!dm.getBaca().equals("1")){
-//            holder.img_belum_baca.setVisibility(View.VISIBLE);
-//            holder.cardView. setBackgroundResource(R.color.grey_200);
-//
-//
-//        }else {
-//            holder.img_belum_baca.setVisibility(View.GONE);
-////            holder.status.setBackgroundResource(R.drawable.bg_nama);
-////            holder.status.setText("News");
-//        }
+        if (!dm.getBaca().equals("1")){
+            holder.img_belum_baca.setVisibility(View.VISIBLE);
+
+
+
+        }else {
+            holder.img_belum_baca.setVisibility(View.GONE);
+//            holder.status.setBackgroundResource(R.drawable.bg_nama);
+//            holder.status.setText("News");
+        }
 
 
 

@@ -1,0 +1,24 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+    <item
+        android:id="@+id/hadir"
+        android:title="Hadir"
+        app:showAsAction="never"
+        />
+
+    <item
+        android:id="@+id/ragu"
+        android:title="Ragu"
+        app:showAsAction="never"
+        />
+
+    <item
+        android:id="@+id/tidak"
+        android:title="Tidak Hadir"
+        app:showAsAction="never"
+        />
+
+</menu>

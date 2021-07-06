@@ -20,12 +20,18 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:requestLegacyExternalStorage="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/Theme.Undangan">
-        <activity android:name=".MainActivity">
+        android:theme="@style/Theme.Undangan"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".menu_login"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".MainActivity" />
+        <activity
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:name=".menu_pembuka"
+            android:windowSoftInputMode="stateVisible|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
