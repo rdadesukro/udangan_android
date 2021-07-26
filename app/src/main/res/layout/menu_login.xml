@@ -81,7 +81,7 @@
                         android:layout_height="@dimen/_40sdp"
                         android:layout_marginTop="16dp"
                         android:layout_marginBottom="16dp"
-                        android:background="@color/biru"
+                        android:background="@color/green_600"
                         android:text="Login"
                         android:textColor="#A8FFFFFF"
                         android:textSize="@dimen/_16sdp"

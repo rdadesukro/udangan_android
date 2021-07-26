@@ -136,12 +136,12 @@ public class fragment_tamu extends Fragment implements view_konfirmasi, com.exam
                 shareIntent.setType("text/plain");
                 shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Insert Subject here");
                 String app_url = " https://play.google.com/store/apps/details?id=my.example.javatpoint";
-                shareIntent.putExtra(Intent.EXTRA_TEXT, "Bismillahirrahmanirrahim, \n" +
+                shareIntent.putExtra(Intent.EXTRA_TEXT, "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم,\n" +
                         "\n" +
                         "Tanpa mengurangi rasa hormat, izinkan kami mengundang Bapak/Ibu/Saudara/i untuk hadir serta memberikan do'a restu pada acara pernikahan kami.\n" +
                         "\n" +
                         "Untuk detail acara, bisa klik link dibawah ini:\n" +
-                        "http://undangan.jambikota.go.id/patim&ade\n" +
+                        "https://undangan.jambikota.go.id/patim&ade\n" +
                         "\n" +
                         "Merupakan suatu kehormatan dan kebahagiaan bagi kami, apabila Bapak/Ibu/Saudara/i berkenan hadir.\n" +
                         "\n" +
@@ -297,7 +297,7 @@ public class fragment_tamu extends Fragment implements view_konfirmasi, com.exam
                         shareIntent.setType("text/plain");
                         shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Insert Subject here");
                         String app_url = " https://play.google.com/store/apps/details?id=my.example.javatpoint";
-                        shareIntent.putExtra(Intent.EXTRA_TEXT, "Bismillahirrahmanirrahim, \n" +
+                        shareIntent.putExtra(Intent.EXTRA_TEXT, "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم,\n" +
                                 "\n" +
                                 "Dear " + nama_tamu +
                                 "\n" +
@@ -305,7 +305,7 @@ public class fragment_tamu extends Fragment implements view_konfirmasi, com.exam
                                 "Tanpa mengurangi rasa hormat, izinkan kami mengundang Bapak/Ibu/Saudara/i untuk hadir serta memberikan do'a restu pada acara pernikahan kami.\n" +
                                 "\n" +
                                 "Untuk detail acara, bisa klik link dibawah ini:\n" +
-                                "http://undangan.jambikota.go.id/patim&ade/" + uuid + "\n" +
+                                "https://undangan.jambikota.go.id/patim&ade/" + uuid + "\n" +
                                 "\n" +
                                 "Merupakan suatu kehormatan dan kebahagiaan bagi kami, apabila Bapak/Ibu/Saudara/i berkenan hadir.\n" +
                                 "\n" +
@@ -314,6 +314,7 @@ public class fragment_tamu extends Fragment implements view_konfirmasi, com.exam
                                 "Jazakumullahu Khairan, hanya kepada Allah, Tuhan Yang Maha Esa tercurah do'a sebagai ungkapan terima kasih kami.\n" +
                                 "\n" +
                                 "\uD83D\uDCCC Do'a untuk mempelai\n" +
+                                "\n"+
                                 "بَارَكَ اللهُ لَكَ وَبَارَكَ عَلَيْكَ وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ\n" +
                                 "\"Semoga Allah memberkahimu di waktu bahagia dan memberkahimu di waktu susah, serta semoga Allah mempersatukan kalian berdua dalam kebaikan” (HR. Abu Dawud no. 2130).\n" +
                                 "\n" +
